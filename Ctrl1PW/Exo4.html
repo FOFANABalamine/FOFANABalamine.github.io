@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Les formulaires en HTML</title>
+</head>
+<body>
+    
+    <h1>Aujourd'hui c'est le BLACK FRIDAY</h1>
+    <h2>Pour être alerté des meilleures offres à ne pas manquer, veuillez remplir les champs ci-dessous</h2>
+
+    <form action="/submit_form" method="post">
+        <label for="Nom_et_Prenom">Nom et prénom</label>
+        <input type="text" id="Nom_et_Prenom" name="Nom_et_Prenom">
+        <p></p>
+        
+        <label for="maillot">Mail</label>
+        <input type="text" name="mail" id="maillot">
+        <p></p>
+        
+        <label for="Message">Message</label>
+        <textarea name="message" id="Message"></textarea>
+        <p></p>
+        
+        <button type="submit">Envoyer le formulaire</button>
+    </form>
+
+</body>
+</html>
