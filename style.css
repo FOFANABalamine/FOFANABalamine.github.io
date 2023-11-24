@@ -1,0 +1,35 @@
+
+ h1{
+    color: blue;
+    background-color: bisque;
+    text-align: center;
+    text-decoration: line;
+        }
+
+.Verte{
+     background-color: green;
+        }
+.Jaune{
+    background-color: yellow;
+        }
+.Rouge{
+    background-color: red;
+        }
+.Bleu{
+    background-color: blue;
+}
+.Blanc{
+    background-color: white;
+}
+ .Verte{
+    background-color: green;
+ }
+ .Rouge{
+    background-color: red;
+ }
+ .Rouge{
+    background-color: red;
+ }
+ table{
+    text-align: center;
+ }
