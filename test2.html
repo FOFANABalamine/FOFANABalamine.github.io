@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mise en Relation GP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM67t68H2R2R4J7lD62bzwU2UOD/1ZsmOYB8Y5" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #89CFF0, #4682B4); /* Dégradé bleu ciel */
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    main {
+      max-width: 800px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .search-form {
+      margin-bottom: 20px;
+    }
+
+    .search-form input, .search-form select, .search-form button {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-right: 10px;
+    }
+
+    .gp-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+
+    .gp-card h2 {
+      margin-bottom: 10px;
+    }
+
+    .rating {
+      color: gold;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .notification {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #e7f3fe;
+      border-left: 6px solid #2196F3;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+        color: #ff3c00; 
+        transition: color .3s ease; 
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 80%;
+      color: black;
+      text-align: left;
+    }
+
+    .close-modal {
+      float: right;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+    <h1>Mise en Relation GP</h1>
+</header>
+
+<main>
+    <h2>Liste des GP disponibles</h2>
+
+    <!-- Formulaire de recherche -->
+    <div class="search-form">
+        <input type="text" id="location" list="location-list" placeholder="Localisation">
+        <datalist id="location-list">
+            <option value="Paris">
+            <option value="Lyon">
+            <option value="Marseille">
+            <option value="Nice">
+            <option value="Toulouse">
+            <option value="Bordeaux">
+        </datalist>
+
+        <input type="text" id="date" placeholder="Choisir une date">
+        <input type="number" id="weight" placeholder="Capacité min (kg)">
+        <button onclick="filterGPs()">Rechercher</button>
+        <button onclick="useGeolocation()">Partager ma localisation</button>
+    </div>
+
+    <!-- Cartes des GP -->
+    <div class="gp-card" data-name="Jean Dupont" data-location="Paris" data-date="2024-10-15" data-weight="500" data-details="Meubles, colis fragiles">
+        <h2>Jean Dupont</h2>
+        <p>Localisation : Paris</p>
+        <p>Date de départ : <strong>15 Octobre</strong></p>
+        <p>Capacité : <strong>500 kg</strong></p>
+        <p>Affaires acceptées : Meubles, colis fragiles</p>
+        <div class="rating">⭐⭐⭐⭐⭐</div>
+    </div>
+
+    <div class="gp-card" data-name="Marie Curie" data-location="Lyon" data-date="2024-10-16" data-weight="300" data-details="Électronique, vêtements">
+        <h2>Marie Curie</h2>
+        <p>Localisation : Lyon</p>
+        <p>Date de départ : <strong>16 Octobre</strong></p>
+        <p>Capacité : <strong>300 kg</strong></p>
+        <p>Affaires acceptées : Électronique, vêtements</p>
+        <div class="rating">⭐⭐⭐⭐</div>
+    </div>
+
+    <div class="gp-card" data-name="Pierre Martin" data-location="Marseille" data-date="2024-10-20" data-weight="400" data-details="Vélos, appareils électroménagers">
+        <h2>Pierre Martin</h2>
+        <p>Localisation : Marseille</p>
+        <p>Date de départ : <strong>20 Octobre</strong></p>
+        <p>Capacité : <strong>400 kg</strong></p>
+        <p>Affaires acceptées : Vélos, appareils électroménagers</p>
+        <div class="rating">⭐⭐⭐⭐</div>
+    </div>
+
+    <div class="gp-card" data-name="Sophie Germain" data-location="Nice" data-date="2024-10-18" data-weight="200" data-details="Livres, vêtements">
+        <h2>Sophie Germain</h2>
+        <p>Localisation : Nice</p>
+        <p>Date de départ : <strong>18 Octobre</strong></p>
+        <p>Capacité : <strong>200 kg</strong></p>
+        <p>Affaires acceptées : Livres, vêtements</p>
+        <div class="rating">⭐⭐⭐⭐</div>
+    </div>
+
+    <!-- Modal pour les détails des GP -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-name"></h2>
+            <p id="modal-location"></p>
+            <p id="modal-date"></p>
+            <p id="modal-weight"></p>
+            <p id="modal-details"></p>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+   <a href="#mentions-legales"><i class="fas fa-file-contract icon"></i>Mentions légales</a>
+   <a href="#charte"><i class="fas fa-shield-alt icon"></i>Charte de protection des données</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Flatpickr - Calendrier visuel pour les dates
+  flatpickr("#date", {
+    enableTime: false,
+    dateFormat: "Y-m-d",
+    minDate: "2024-01-01",
+    maxDate: "2025-12-31"
+  });
+
+  // Fonction de géolocalisation
+  function useGeolocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
+    }
+  }
+
+  function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    alert(`Votre position : Latitude: ${latitude}, Longitude: ${longitude}`);
+    // Ici, vous pourriez envoyer la localisation à un service de recherche
+    // pour ajuster les GP disponibles selon la distance.
+  }
+
+  function showError(error) {
+    switch(error.code) {
+      case error.PERMISSION_DENIED:
+        alert("L'utilisateur a refusé la demande de géolocalisation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert("Les informations de localisation sont indisponibles.");
+        break;
+      case error.TIMEOUT:
+        alert("La demande de géolocalisation a expiré.");
+        break;
+      case error.UNKNOWN_ERROR:
+        alert("Une erreur inconnue s'est produite.");
+        break;
+    }
+  }
+
+  // Filtrage des GP
+  function filterGPs() {
+    const location = document.getElementById("location").value.toLowerCase();
+    const date = document.getElementById("date").value;
+    const weight = parseInt(document.getElementById("weight").value);
+
+    const gpCards = document.querySelectorAll(".gp-card");
+
+    gpCards.forEach(card => {
+      const gpLocation = card.getAttribute("data-location").toLowerCase();
+      const gpDate = card.getAttribute("data-date");
+      const gpWeight = parseInt(card.getAttribute("data-weight"));
+
+      if ((location === "" || gpLocation.includes(location)) &&
+          (date === "" || gpDate === date) &&
+          (isNaN(weight) || gpWeight >= weight)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  // Affichage des détails dans le modal
+  const gpCards = document.querySelectorAll(".gp-card");
+  const modal = document.getElementById("modal");
+  const modalName = document.getElementById("modal-name");
+  const modalLocation = document.getElementById("modal-location");
+  const modalDate = document.getElementById("modal-date");
+  const modalWeight = document.getElementById("modal-weight");
+  const modalDetails = document.getElementById("modal-details");
+  const closeModal = document.querySelector(".close-modal");
+
+  gpCards.forEach(card => {
+    card.addEventListener("click", () => {
+      modalName.textContent = card.getAttribute("data-name");
+      modalLocation.textContent = "Localisation : " + card.getAttribute("data-location");
+      modalDate.textContent = "Date de départ : " + card.getAttribute("data-date");
+      modalWeight.textContent = "Capacité : " + card.getAttribute("data-weight") + " kg";
+      modalDetails.textContent = "Affaires acceptées : " + card.getAttribute("data-details");
+      modal.style.display = "flex";
+    });
+  });
+
+  closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Attacher la fonction de filtrage au bouton
+  window.filterGPs = filterGPs;
+  window.useGeolocation = useGeolocation;
+});
+</script>
+
+</body>
+</html>
