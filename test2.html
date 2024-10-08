@@ -70,6 +70,13 @@
       margin-bottom: 10px;
     }
 
+    .gp-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
     .rating {
       color: gold;
     }
@@ -170,53 +177,71 @@
             <option value="Nice">
             <option value="Toulouse">
             <option value="Bordeaux">
+            <option value="Nantes">
+            <option value="Strasbourg">
+            <option value="Montpellier">
+            <option value="Rouen">
+            <option value="Grenoble">
+            <option value="Saint-Étienne">
+            <option value="Nice">
+            <option value="Angers">
+            <option value="Nîmes">
+            <option value="Aix-en-Provence">
+            <option value="Brest">
+            <option value="Limoges">
+            <option value="Clermont-Ferrand">
+            <option value="Tours">
         </datalist>
 
         <input type="text" id="date" placeholder="Choisir une date">
-        <input type="number" id="weight" placeholder="Capacité min (kg)">
+        <input type="number" id="weight" placeholder="Capacité max (kg)" value="50" disabled>
         <button onclick="filterGPs()">Rechercher</button>
-        <button onclick="useGeolocation()">Partager ma localisation</button>
     </div>
 
     <!-- Cartes des GP -->
-    <div class="gp-card" data-name="Jean Dupont" data-location="Paris" data-date="2024-10-15" data-weight="500" data-details="Meubles, colis fragiles">
+    <div class="gp-card" data-name="Jean Dupont" data-location="Paris" data-date="2024-10-15" data-weight="50" data-details="Meubles, colis fragiles">
+        <img src="https://via.placeholder.com/300.png?text=Jean+Dupont" alt="Jean Dupont">
         <h2>Jean Dupont</h2>
         <p>Localisation : Paris</p>
         <p>Date de départ : <strong>15 Octobre</strong></p>
-        <p>Capacité : <strong>500 kg</strong></p>
+        <p>Capacité : <strong>50 kg</strong></p>
         <p>Affaires acceptées : Meubles, colis fragiles</p>
         <div class="rating">⭐⭐⭐⭐⭐</div>
     </div>
 
-    <div class="gp-card" data-name="Marie Curie" data-location="Lyon" data-date="2024-10-16" data-weight="300" data-details="Électronique, vêtements">
+    <div class="gp-card" data-name="Marie Curie" data-location="Lyon" data-date="2024-10-16" data-weight="50" data-details="Électronique, vêtements">
+        <img src="https://via.placeholder.com/300.png?text=Marie+Curie" alt="Marie Curie">
         <h2>Marie Curie</h2>
         <p>Localisation : Lyon</p>
         <p>Date de départ : <strong>16 Octobre</strong></p>
-        <p>Capacité : <strong>300 kg</strong></p>
+        <p>Capacité : <strong>50 kg</strong></p>
         <p>Affaires acceptées : Électronique, vêtements</p>
         <div class="rating">⭐⭐⭐⭐</div>
     </div>
 
-    <div class="gp-card" data-name="Pierre Martin" data-location="Marseille" data-date="2024-10-20" data-weight="400" data-details="Vélos, appareils électroménagers">
+    <div class="gp-card" data-name="Pierre Martin" data-location="Marseille" data-date="2024-10-20" data-weight="50" data-details="Vélos, appareils électroménagers">
+        <img src="https://via.placeholder.com/300.png?text=Pierre+Martin" alt="Pierre Martin">
         <h2>Pierre Martin</h2>
         <p>Localisation : Marseille</p>
         <p>Date de départ : <strong>20 Octobre</strong></p>
-        <p>Capacité : <strong>400 kg</strong></p>
+        <p>Capacité : <strong>50 kg</strong></p>
         <p>Affaires acceptées : Vélos, appareils électroménagers</p>
         <div class="rating">⭐⭐⭐⭐</div>
     </div>
 
-    <div class="gp-card" data-name="Sophie Germain" data-location="Nice" data-date="2024-10-18" data-weight="200" data-details="Livres, vêtements">
+    <div class="gp-card" data-name="Sophie Germain" data-location="Nice" data-date="2024-10-18" data-weight="50" data-details="Livres, vêtements">
+        <img src="https://via.placeholder.com/300.png?text=Sophie+Germain" alt="Sophie Germain">
         <h2>Sophie Germain</h2>
         <p>Localisation : Nice</p>
         <p>Date de départ : <strong>18 Octobre</strong></p>
-        <p>Capacité : <strong>200 kg</strong></p>
+        <p>Capacité : <strong>50 kg</strong></p>
         <p>Affaires acceptées : Livres, vêtements</p>
-        <div class="rating">⭐⭐⭐⭐</div>
+        <div class="rating">⭐⭐⭐⭐⭐</div>
     </div>
 
-    <!-- Modal pour les détails des GP -->
-    <div id="modal" class="modal">
+    <!-- Vous pouvez continuer à ajouter d'autres GP de la même manière -->
+
+    <div class="modal" id="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2 id="modal-name"></h2>
@@ -230,8 +255,7 @@
 </main>
 
 <footer>
-   <a href="#mentions-legales"><i class="fas fa-file-contract icon"></i>Mentions légales</a>
-   <a href="#charte"><i class="fas fa-shield-alt icon"></i>Charte de protection des données</a>
+    <p>&copy; 2024 Mise en Relation GP | <a href="#">Politique de confidentialité</a></p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -244,40 +268,6 @@ document.addEventListener("DOMContentLoaded", function() {
     minDate: "2024-01-01",
     maxDate: "2025-12-31"
   });
-
-  // Fonction de géolocalisation
-  function useGeolocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-      alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
-    }
-  }
-
-  function showPosition(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    alert(`Votre position : Latitude: ${latitude}, Longitude: ${longitude}`);
-    // Ici, vous pourriez envoyer la localisation à un service de recherche
-    // pour ajuster les GP disponibles selon la distance.
-  }
-
-  function showError(error) {
-    switch(error.code) {
-      case error.PERMISSION_DENIED:
-        alert("L'utilisateur a refusé la demande de géolocalisation.");
-        break;
-      case error.POSITION_UNAVAILABLE:
-        alert("Les informations de localisation sont indisponibles.");
-        break;
-      case error.TIMEOUT:
-        alert("La demande de géolocalisation a expiré.");
-        break;
-      case error.UNKNOWN_ERROR:
-        alert("Une erreur inconnue s'est produite.");
-        break;
-    }
-  }
 
   // Filtrage des GP
   function filterGPs() {
@@ -294,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       if ((location === "" || gpLocation.includes(location)) &&
           (date === "" || gpDate === date) &&
-          (isNaN(weight) || gpWeight >= weight)) {
+          (isNaN(weight) || gpWeight <= weight)) {
         card.style.display = "block";
       } else {
         card.style.display = "none";
@@ -335,7 +325,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Attacher la fonction de filtrage au bouton
   window.filterGPs = filterGPs;
-  window.useGeolocation = useGeolocation;
 });
 </script>
 
