@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription GP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #89CFF0, #4682B4);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Centré verticalement */
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px; /* Un peu de padding sur les côtés */
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeIn 1s ease-in; /* Animation d'apparition */
+    }
+
+    .form-container {
+      max-width: 600px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease; /* Effet de zoom */
+    }
+
+    .form-container:hover {
+      transform: scale(1.02); /* Zoom au survol */
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, select, textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 15px;
+      font-size: 1rem;
+      transition: border 0.3s ease, box-shadow 0.3s ease; /* Transition pour l'ombre */
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border: 2px solid #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ombre au focus */
+    }
+
+    button {
+      padding: 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition pour l'ombre */
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Ombre plus marquée au survol */
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #ffcc00; /* Jaune pour attirer l'attention */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Inscription GP</h1>
+
+  <div class="form-container">
+    <form action="process_form.php" method="POST"> <!-- Changez ici l'action en fonction de votre fichier PHP -->
+      <input type="text" name="name" placeholder="Nom complet" required>
+      <input type="text" name="address" placeholder="Adresse" required>
+      <input type="text" name="locality" placeholder="Localité" required>
+      <input type="text" name="postal_code" placeholder="Code postal" required>
+      <input type="text" name="country" placeholder="Pays" required>
+      
+      <input type="tel" name="phone_fr" placeholder="Numéro de téléphone (France) +33" required pattern="^\+33[0-9]{9}$" title="Format: +33XXXXXXXXX">
+      <input type="tel" name="phone_sn" placeholder="Numéro de téléphone (Sénégal) +221" required pattern="^\+221[0-9]{8}$" title="Format: +221XXXXXXXX">
+      
+      <input type="email" name="email" placeholder="Adresse e-mail" required>
+      
+      <textarea name="details" placeholder="Détails supplémentaires (facultatif)" rows="4"></textarea>
+      
+      <button type="submit">Envoyer</button>
+      
+      <p class="note">*Tous les champs sont obligatoires.</p>
+    </form>
+  </div>
+
+</body>
+</html>

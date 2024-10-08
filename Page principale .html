@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mise en Relation GP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #89CFF0, #4682B4);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centré verticalement */
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: fadeIn 1s ease-in; /* Animation d'apparition */
+        }
+
+        .options-container {
+            background: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease; /* Effet de zoom */
+        }
+
+        .options-container:hover {
+            transform: scale(1.05); /* Zoom au survol */
+        }
+
+        .options {
+            display: flex;
+            gap: 20px;
+        }
+
+        .button {
+            padding: 15px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition pour l'ombre */
+            text-decoration: none; /* Supprime le soulignement des liens */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Ombre plus marquée au survol */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Mise en Relation GP</h1>
+
+    <div class="options-container">
+        <div class="options">
+            <a href="client.html" class="button">Client</a>
+            <a href="GP.html" class="button">GP</a>
+        </div>
+    </div>
+
+</body>
+</html>
