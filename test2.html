@@ -70,13 +70,6 @@
       margin-bottom: 10px;
     }
 
-    .gp-card img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-
     .rating {
       color: gold;
     }
@@ -102,9 +95,10 @@
       border-left: 6px solid #2196F3;
     }
 
+    /* MODIFICATION ICI - Footer fixé en bas de la page */
     footer {
-      position: fixed;
-      bottom: 20px;
+      position: relative;
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(255, 255, 255, 0.1);
@@ -114,6 +108,12 @@
       display: flex;
       justify-content: space-between;
       width: 80%;
+      margin-top: 20px; /* pour éviter de coller au contenu */
+    }
+
+    footer.fixed-footer {
+      position: absolute;
+      bottom: 0;
     }
 
     a {
@@ -177,30 +177,30 @@
             <option value="Nice">
             <option value="Toulouse">
             <option value="Bordeaux">
-            <option value="Nantes">
+            <!-- Nouvelles villes ajoutées -->
+            <option value="Lille">
             <option value="Strasbourg">
-            <option value="Montpellier">
-            <option value="Rouen">
             <option value="Grenoble">
-            <option value="Saint-Étienne">
-            <option value="Nice">
-            <option value="Angers">
-            <option value="Nîmes">
-            <option value="Aix-en-Provence">
-            <option value="Brest">
-            <option value="Limoges">
-            <option value="Clermont-Ferrand">
+            <option value="Nantes">
+            <option value="Montpellier">
+            <option value="Rennes">
+            <option value="Dijon">
+            <option value="Metz">
+            <option value="Orléans">
+            <option value="Amiens">
             <option value="Tours">
+            <option value="Clermont-Ferrand">
+            <option value="Le Havre">
+            <option value="Saint-Étienne">
         </datalist>
 
         <input type="text" id="date" placeholder="Choisir une date">
-        <input type="number" id="weight" placeholder="Capacité max (kg)" value="50" disabled>
+        <input type="number" id="weight" placeholder="Capacité min (kg)">
         <button onclick="filterGPs()">Rechercher</button>
     </div>
 
     <!-- Cartes des GP -->
-    <div class="gp-card" data-name="Jean Dupont" data-location="Paris" data-date="2024-10-15" data-weight="50" data-details="Meubles, colis fragiles">
-        <img src="https://via.placeholder.com/300.png?text=Jean+Dupont" alt="Jean Dupont">
+    <div class="gp-card" data-name="Jean Dupont" data-location="Paris" data-date="2024-10-15" data-weight="500" data-details="Meubles, colis fragiles">
         <h2>Jean Dupont</h2>
         <p>Localisation : Paris</p>
         <p>Date de départ : <strong>15 Octobre</strong></p>
@@ -209,39 +209,35 @@
         <div class="rating">⭐⭐⭐⭐⭐</div>
     </div>
 
-    <div class="gp-card" data-name="Marie Curie" data-location="Lyon" data-date="2024-10-16" data-weight="50" data-details="Électronique, vêtements">
-        <img src="https://via.placeholder.com/300.png?text=Marie+Curie" alt="Marie Curie">
+    <div class="gp-card" data-name="Marie Curie" data-location="Lyon" data-date="2024-10-16" data-weight="300" data-details="Électronique, vêtements">
         <h2>Marie Curie</h2>
         <p>Localisation : Lyon</p>
         <p>Date de départ : <strong>16 Octobre</strong></p>
-        <p>Capacité : <strong>50 kg</strong></p>
+        <p>Capacité : <strong>300 kg</strong></p>
         <p>Affaires acceptées : Électronique, vêtements</p>
         <div class="rating">⭐⭐⭐⭐</div>
     </div>
 
-    <div class="gp-card" data-name="Pierre Martin" data-location="Marseille" data-date="2024-10-20" data-weight="50" data-details="Vélos, appareils électroménagers">
-        <img src="https://via.placeholder.com/300.png?text=Pierre+Martin" alt="Pierre Martin">
+    <div class="gp-card" data-name="Pierre Martin" data-location="Marseille" data-date="2024-10-20" data-weight="400" data-details="Vélos, appareils électroménagers">
         <h2>Pierre Martin</h2>
         <p>Localisation : Marseille</p>
         <p>Date de départ : <strong>20 Octobre</strong></p>
-        <p>Capacité : <strong>50 kg</strong></p>
+        <p>Capacité : <strong>400 kg</strong></p>
         <p>Affaires acceptées : Vélos, appareils électroménagers</p>
-        <div class="rating">⭐⭐⭐⭐</div>
+        <div class="rating">⭐⭐⭐</div>
     </div>
 
-    <div class="gp-card" data-name="Sophie Germain" data-location="Nice" data-date="2024-10-18" data-weight="50" data-details="Livres, vêtements">
-        <img src="https://via.placeholder.com/300.png?text=Sophie+Germain" alt="Sophie Germain">
+    <div class="gp-card" data-name="Sophie Germain" data-location="Nice" data-date="2024-10-18" data-weight="200" data-details="Livres, vêtements">
         <h2>Sophie Germain</h2>
         <p>Localisation : Nice</p>
         <p>Date de départ : <strong>18 Octobre</strong></p>
-        <p>Capacité : <strong>50 kg</strong></p>
+        <p>Capacité : <strong>200 kg</strong></p>
         <p>Affaires acceptées : Livres, vêtements</p>
-        <div class="rating">⭐⭐⭐⭐⭐</div>
+        <div class="rating">⭐⭐</div>
     </div>
 
-    <!-- Vous pouvez continuer à ajouter d'autres GP de la même manière -->
-
-    <div class="modal" id="modal">
+    <!-- Modal pour les détails des GP -->
+    <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2 id="modal-name"></h2>
@@ -255,7 +251,8 @@
 </main>
 
 <footer>
-    <p>&copy; 2024 Mise en Relation GP | <a href="#">Politique de confidentialité</a></p>
+   <a href="#mentions-legales"><i class="fas fa-file-contract icon"></i>Mentions légales</a>
+   <a href="#charte"><i class="fas fa-shield-alt icon"></i>Charte de protection des données</a>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -284,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       if ((location === "" || gpLocation.includes(location)) &&
           (date === "" || gpDate === date) &&
-          (isNaN(weight) || gpWeight <= weight)) {
+          (isNaN(weight) || gpWeight >= weight)) {
         card.style.display = "block";
       } else {
         card.style.display = "none";
